@@ -1,0 +1,163 @@
+<html>
+<head>
+
+	<script>
+		var saldo = 100.5;
+		var nome;
+
+		function inserir_nome() {
+			nome = prompt('Insira seu nome');
+			inicio();
+		}
+
+		function inicio() {
+			var escolha = parseInt(prompt('Selecione uma opção  1.) Saldo  2.)Extrato  3.) Depósito  4.) Saque  5.) Transferência  6.) Sair'));
+			switch (escolha) {
+				case 1:
+					ver_saldo()
+					break;
+				case 2:
+					ver_extrato();
+					break;
+				case 3:
+					fazer_deposito();
+					break;
+				case 4:
+					fazer_saque();
+					break;
+				case 5:
+					fazer_transferencia();
+					break;
+				case 6:
+					sair();
+					break;
+				default:
+					erro();
+			}
+		}
+
+		function ver_saldo() {
+			senha = prompt('Qual a senha?');
+
+        		if (senha == 3589) { 
+				alert(` Seu saldo atual é ${saldo}`);
+				inicio();
+
+			 } else {
+				 alert('Senha inválida');
+				 ver_saldo();
+			 }
+		}
+
+		function ver_extrato() {
+			senha = prompt('Insira sua senha');
+
+				if (senha == 3589) { 
+					alert(`Extrato Bancário de ${nome}:
+					Depósito --------- R$ 500,00.
+					Transferência entre contas  --------- 822,00.
+
+					Compra cartão de deb
+					Iphone-XR Apple Branco / extra --------- Valor de R$ 2.969,10.
+					Conjunto de panelas / Amazon --------- Valor R$ 310,99.
+					Kindle 10a Geração cor preta / Amazon --------- Valor R$ 399,05.
+					Macacão preto simples / Shein --------- Valor R$ 41,90.
+					Conjunto Moletom algodão Ciano / Shein --------- Valor R$ 126,95.
+					Bolo Alpes Suiços com Morangos / Sodiê Doces --------- Valor R$ 80,00`);
+					inicio();
+					
+        			} else  {
+					alert('Senha inválida');
+					ver_extrato();
+			 }
+
+			
+			inicio();
+		}
+
+		function fazer_deposito() {
+			var deposito = parseFloat(prompt('Qual o valor para depósito?'));
+			if (isNaN(deposito) || deposito === '' || deposito <= 0) {
+				alert('Operação não autorizada');
+				fazer_deposito();
+			
+			} else {
+				saldo += deposito;
+				ver_saldo();
+			}
+		}
+
+		function fazer_saque() {
+			var saque = parseFloat(prompt('Qual o valor para saque?'));
+    			if (isNaN(saque) || saque === '' || saque <= 0 || saque >= saldo ) {
+       				 alert('Operação não autorizada');
+        			 fazer_saque();
+    				} else {
+        			senha = prompt('Insira sua senha');
+				 }
+
+        		if (senha == 3589) { 
+						saldo -= saque;
+						ver_saldo();
+
+        			} else  {
+					alert('Senha inválida')
+            		fazer_saque();
+        		}
+        			ver_saldo();
+			
+		 }
+
+		function fazer_transferencia(){
+			var agência = (prompt(`Informe a agência`));
+
+			if (isNaN(agência) || agência === "" || agência <= 0) {
+				alert(`Por favor, insira um número válido`);
+				fazer_transferencia();
+			}
+
+			var transferencia = parseFloat(prompt('Valor de tranferência:'));
+
+			if(isNaN(transferencia) || transferencia === "" || transferencia <= 0 || transferencia >= saldo) {
+				alert('Por favor, insira um número válido e/ou um valor que tenha disponível em seu saldo.')
+				fazer_transferencia();
+			 } else {
+				senha = prompt('Insira sua senha')
+
+				if (senha == 3589) {
+					saldo -= transferencia;
+					alert(`Um valor de ${tranferencia} foi transferido para a agência: ${agência}`);
+				 } else {
+					 alert('Senha inválida')
+					 fazer_transferencia();
+				 }
+				 ver_saldo();
+				}
+			 }
+
+		function erro() {
+			alert('Por favor, informe um número entre 1 e 4');
+			inicio();
+		}
+
+
+		function sair() {
+			var confirma = confirm('Você deseja sair?');
+			if (confirma) {
+				alert(`${nome}, Foi um prazer ter você aqui!`);
+				window.close();
+			} else {
+				inicio();
+			 }
+		 }	 
+		 
+
+		inserir_nome();
+	</script>
+</head>
+
+<body>
+
+</body>
+
+</html>
